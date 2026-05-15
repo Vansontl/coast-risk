@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoastalRisk ANFIS</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <div class="brand-logo-card">
+          <img src="./assets/logo-dhtl.jpg" alt="Logo Đại học Thủy lợi" class="brand-logo" />
+        </div>
+        <div>
+          <h1>CoastalRisk ANFIS</h1>
+          <p>Bộ công cụ đánh giá rủi ro thi công đê, kè biển theo mô hình ANFIS (kết hợp lý thuyết mờ và trí tuệ nhân tạo).</p>
+        </div>
+      </div>
+      <div class="mobile-nav-select-wrap">
+        <label for="mobileSectionSelect" class="mobile-nav-label">Điều hướng nhanh</label>
+        <select id="mobileSectionSelect" class="mobile-nav-select">
+          <option value="section-overview">Tổng quan</option>
+          <option value="section-a1">A1. Khảo sát chuyên gia</option>
+          <option value="section-a2">A2. Dữ liệu công trình</option>
+          <option value="section-a3">A3. Huấn luyện ANN/ANFIS</option>
+          <option value="section-a4">A4. Quản lý mô hình</option>
+          <option value="section-b1">B1. Nhập công trình mới</option>
+          <option value="section-b2">B2. Dự báo rủi ro</option>
+          <option value="section-b3">B3. Báo cáo và lịch sử</option>
+        </select>
+      </div>
+      <nav class="nav-list">
+        <button class="nav-btn active" data-target="section-overview">Tổng quan</button>
+        <button class="nav-btn" data-target="section-a1">A1. Khảo sát chuyên gia</button>
+        <button class="nav-btn" data-target="section-a2">A2. Dữ liệu công trình</button>
+        <button class="nav-btn" data-target="section-a3">A3. Huấn luyện ANN/ANFIS</button>
+        <button class="nav-btn" data-target="section-a4">A4. Quản lý mô hình</button>
+        <button class="nav-btn" data-target="section-b1">B1. Nhập công trình mới</button>
+        <button class="nav-btn" data-target="section-b2">B2. Dự báo rủi ro</button>
+        <button class="nav-btn" data-target="section-b3">B3. Báo cáo và lịch sử</button>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="page-section active" id="section-overview">
+        <div class="overview-hero">
+          <div class="overview-logo-card">
+            <div class="overview-logo-circle">
+              <img src="./assets/logo-dhtl.jpg" alt="Logo Đại học Thủy lợi" class="overview-logo-image" />
+            </div>
+            <div class="overview-logo-caption">CoastalRisk ANFIS</div>
+          </div>
+          <div class="overview-main-card">
+            <span class="badge">TỔNG QUAN HỆ THỐNG</span>
+            <h2>CoastalRisk ANFIS</h2>
+            <p class="overview-subtitle">Bộ công cụ đánh giá rủi ro thi công đê, kè biển theo mô hình ANFIS kết hợp lý thuyết mờ và trí tuệ nhân tạo.</p>
+            <div class="overview-meta-grid">
+              <div class="info-tile">
+                <span class="info-label">Tên luận án</span>
+                <strong>Nghiên cứu đánh giá rủi ro trong quá trình thi công các công trình đê, kè biển ở các tỉnh Nam Trung Bộ ứng dụng lý thuyết mờ và trí tuệ nhân tạo.</strong>
+              </div>
+              <div class="info-tile">
+                <span class="info-label">Nghiên cứu sinh</span>
+                <strong>Nguyễn Đình Chức</strong>
+              </div>
+              <div class="info-tile">
+                <span class="info-label">Người hướng dẫn khoa học</span>
+                <strong>TS. Nguyễn Văn Sơn - PGS.TS. Nguyễn Hữu Huế</strong>
+              </div>
+              <div class="info-tile">
+                <span class="info-label">Phạm vi ứng dụng</span>
+                <strong>Đánh giá rủi ro thi công đê, kè biển khu vực Nam Trung Bộ</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="card">
+            <h3>Sơ đồ ANN kết hợp fuzzy</h3>
+            <div class="pipeline-grid">
+              <div class="pipeline-step"><strong>Lớp đầu vào</strong><span>Tiếp nhận 6 chỉ tiêu tổng hợp nội bộ phục vụ dự báo rủi ro</span></div>
+              <div class="pipeline-step"><strong>Lớp mờ hóa</strong><span>Ánh xạ các chỉ tiêu tổng hợp nội bộ qua các hàm thành viên</span></div>
+              <div class="pipeline-step"><strong>Lớp luật mờ / Sugeno</strong><span>Thiết lập các luật if-then từ tri thức chuyên gia</span></div>
+              <div class="pipeline-step"><strong>Lớp ANN / học tham số</strong><span>Học tham số, tối ưu mô hình trên dữ liệu train/test</span></div>
+              <div class="pipeline-step"><strong>Lớp đầu ra</strong><span>Tạo điểm rủi ro và mức rủi ro phục vụ dự báo</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Cấu trúc phân hệ</h3>
+            <div class="module-map">
+              <div class="module-block">
+                <div class="module-title">Phân hệ A - Xây dựng mô hình</div>
+                <ul>
+                  <li>A1. Khảo sát chuyên gia</li>
+                  <li>A2. Dữ liệu công trình theo vùng</li>
+                  <li>A3. Huấn luyện ANN/ANFIS</li>
+                  <li>A4. Quản lý mô hình theo vùng</li>
+                </ul>
+              </div>
+              <div class="module-block">
+                <div class="module-title">Phân hệ B - Khai thác mô hình</div>
+                <ul>
+                  <li>B1. Nhập công trình mới</li>
+                  <li>B2. Dự báo rủi ro</li>
+                  <li>B3. Báo cáo và lịch sử</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" id="section-a1">
+        <div class="card hero"><span class="badge">A1</span><h2>Khảo sát chuyên gia</h2><p>Nạp file khảo sát, phân tích các chỉ số P, I, C, R và xếp hạng các yếu tố rủi ro. Có trạng thái rõ ràng theo từng bước xử lý.</p></div>
+        <div class="card">
+          <div class="toolbar">
+            <input id="expertSurveyFile" type="file" accept=".xlsx,.xls" />
+            <button id="exportExpertTemplateBtn" class="ghost-btn">Xuất mẫu khảo sát</button>
+            <button id="uploadExpertBtn" class="primary-btn">Nạp file khảo sát</button>
+          </div>
+          <div class="step-status-row" id="expertStepRow">
+            <span class="step-chip" id="expertUploadChip">1. Chưa nạp file</span>
+            <span class="step-chip" id="expertAnalyzeChip">2. Chưa phân tích</span>
+          </div>
+          <div id="expertStatus" class="status-box">Chưa có file khảo sát được xử lý.</div>
+          <div class="progress-shell"><div id="expertProgressBar" class="progress-bar"></div></div>
+          <div id="expertProgressText" class="progress-text">0%</div>
+          <div id="expertEtaText" class="progress-text subtle-text">ETA: --</div>
+        </div>
+        <div class="card table-wrap"><h3>Kết quả khảo sát chuyên gia</h3><table><thead><tr><th>Yếu tố</th><th>Nhóm</th><th>P</th><th>I</th><th>C</th><th>R</th><th>Hạng</th></tr></thead><tbody id="expertResultsBody"><tr><td colspan="7" class="muted">Chưa có kết quả khảo sát chuyên gia.</td></tr></tbody></table></div>
+      </section>
+
+      <section class="page-section" id="section-a2">
+        <div class="card hero"><span class="badge">A2</span><h2>Dữ liệu công trình theo vùng</h2><p>Nạp bộ dữ liệu công trình thực tế, kiểm tra cấu trúc, xem dữ liệu thiếu, thêm/sửa/xóa trực tiếp trên bảng dữ liệu.</p></div>
+        <div class="card">
+          <div class="toolbar">
+            <input id="datasetFile" type="file" accept=".xlsx,.xls" />
+            <input id="datasetNameInput" placeholder="Đặt tên bảng dữ liệu" />
+            <button id="exportDatasetTemplateBtn" class="ghost-btn">Xuất file dữ liệu mẫu</button>
+            <button id="uploadDatasetBtn" class="primary-btn">Tải dữ liệu</button>
+            <button id="checkDatasetBtn" class="ghost-btn">Kiểm tra cấu trúc dữ liệu</button>
+          </div>
+          <div class="step-status-row" id="datasetStepRow">
+            <span class="step-chip" id="datasetUploadChip">1. Chưa tải dữ liệu</span>
+            <span class="step-chip" id="datasetCheckChip">2. Chưa kiểm tra cấu trúc</span>
+          </div>
+          <div id="datasetStatus" class="status-box">Chưa có dataset nào được xử lý.</div>
+          <div class="progress-shell"><div id="datasetProgressBar" class="progress-bar"></div></div>
+          <div id="datasetProgressText" class="progress-text">0%</div>
+          <div id="datasetEtaText" class="progress-text subtle-text">ETA: --</div>
+        </div>
+        <div class="grid two-col">
+          <div class="card table-wrap">
+            <h3>Danh sách dataset</h3>
+            <div class="toolbar"><button id="deleteSelectedDatasetsBtn" class="ghost-btn">Xóa các bảng đã tick</button><button id="deleteAllDatasetsBtn" class="ghost-btn">Xóa toàn bộ</button></div><table><thead><tr><th>Chọn</th><th>ID</th><th>Tên dataset</th><th>Số mẫu</th><th>Thao tác</th></tr></thead><tbody id="datasetListBody"><tr><td colspan="5" class="muted">Chưa có dataset nào.</td></tr></tbody></table>
+          </div>
+          <div class="card">
+            <h3>Thông tin dữ liệu đang chọn</h3>
+            <div id="datasetFormMode" class="status-box">Chế độ: thêm dòng mới</div>
+            <div id="datasetQualityBox" class="status-box" style="margin-top:12px;">Chưa kiểm tra cấu trúc dữ liệu.</div>
+          </div>
+        </div>
+        <div class="card table-wrap"><h3>Các dòng của dataset đang mở</h3><table><thead><tr><th>ID</th><th>Mã CT</th><th>Vùng</th><th>Tên công trình</th><th>Điểm rủi ro</th><th>Mức rủi ro</th><th>Thao tác</th></tr></thead><tbody id="datasetRowsBody"><tr><td colspan="7" class="muted">Chưa tải danh sách dòng dataset.</td></tr></tbody></table></div>
+
+        <div id="datasetDetailModal" class="modal hidden">
+          <div class="modal-backdrop" data-close-dataset-modal="true"></div>
+          <div class="modal-panel large-modal">
+            <div class="modal-header">
+              <h3>Chi tiết đầy đủ 29 cột dữ liệu</h3>
+              <button id="closeDatasetModalBtn" class="ghost-btn">Đóng</button>
+            </div>
+            <div class="modal-body">
+              <div class="project-intake-grid dataset-modal-grid">
+                <div class="factor-field"><label>Mã công trình</label><input id="modalProjectId" placeholder="Mã công trình" /></div>
+                <div class="factor-field"><label>Tên công trình</label><input id="modalProjectName" placeholder="Tên công trình" /></div>
+                <div class="factor-field"><label>Vùng / khu vực</label><input id="modalRegion" placeholder="Vùng / khu vực" /></div>
+                <div class="factor-field"><label>Chiều cao sóng</label><input id="modalWaveHeight" placeholder="Chiều cao sóng" /></div>
+                <div class="factor-field"><label>Chế độ thủy triều</label><input id="modalTideMode" placeholder="Chế độ thủy triều" /></div>
+                <div class="factor-field"><label>Tốc độ gió</label><input id="modalWindSpeed" placeholder="Tốc độ gió" /></div>
+                <div class="factor-field"><label>Mức độ ảnh hưởng bão</label><input id="modalStormLevel" placeholder="Mức độ ảnh hưởng bão" /></div>
+                <div class="factor-field"><label>Loại đất nền</label><input id="modalSoilType" placeholder="Loại đất nền" /></div>
+                <div class="factor-field"><label>Chiều dày lớp đất yếu</label><input id="modalWeakLayer" placeholder="Chiều dày lớp đất yếu" /></div>
+                <div class="factor-field"><label>Nguy cơ trượt mái</label><input id="modalSlideRisk" placeholder="Nguy cơ trượt mái" /></div>
+                <div class="factor-field"><label>Chất lượng khảo sát</label><input id="modalSurveyQuality" placeholder="Chất lượng khảo sát" /></div>
+                <div class="factor-field"><label>Độ phức tạp kỹ thuật</label><input id="modalTechComplex" placeholder="Độ phức tạp kỹ thuật" /></div>
+                <div class="factor-field"><label>Độ khó biện pháp thi công</label><input id="modalConstructionDiff" placeholder="Độ khó biện pháp thi công" /></div>
+                <div class="factor-field"><label>Phụ thuộc thiết bị chuyên dụng</label><input id="modalEquipmentDepend" placeholder="Phụ thuộc thiết bị chuyên dụng" /></div>
+                <div class="factor-field"><label>Nguy cơ sai sót kỹ thuật</label><input id="modalTechError" placeholder="Nguy cơ sai sót kỹ thuật" /></div>
+                <div class="factor-field"><label>Khả năng cung ứng vật liệu</label><input id="modalMaterialSupply" placeholder="Khả năng cung ứng vật liệu" /></div>
+                <div class="factor-field"><label>Khả năng huy động thiết bị</label><input id="modalEquipmentMobilize" placeholder="Khả năng huy động thiết bị" /></div>
+                <div class="factor-field"><label>Rủi ro vận chuyển</label><input id="modalTransportRisk" placeholder="Rủi ro vận chuyển" /></div>
+                <div class="factor-field"><label>Nguy cơ thiếu hụt nguồn lực</label><input id="modalResourceShortage" placeholder="Nguy cơ thiếu hụt nguồn lực" /></div>
+                <div class="factor-field"><label>Năng lực quản lý hiện trường</label><input id="modalSiteManage" placeholder="Năng lực quản lý hiện trường" /></div>
+                <div class="factor-field"><label>Rủi ro phối hợp các bên</label><input id="modalCoordinationRisk" placeholder="Rủi ro phối hợp các bên" /></div>
+                <div class="factor-field"><label>Nguy cơ chậm tiến độ</label><input id="modalScheduleRisk" placeholder="Nguy cơ chậm tiến độ" /></div>
+                <div class="factor-field"><label>Khả năng xử lý sự cố</label><input id="modalIssueHandling" placeholder="Khả năng xử lý sự cố" /></div>
+                <div class="factor-field"><label>An toàn lao động</label><input id="modalLaborSafety" placeholder="An toàn lao động" /></div>
+                <div class="factor-field"><label>An toàn thi công trên biển</label><input id="modalMarineSafety" placeholder="An toàn thi công trên biển" /></div>
+                <div class="factor-field"><label>Rủi ro môi trường</label><input id="modalEnvironmentRisk" placeholder="Rủi ro môi trường" /></div>
+                <div class="factor-field"><label>Khả năng ứng cứu khẩn cấp</label><input id="modalEmergencyResponse" placeholder="Khả năng ứng cứu khẩn cấp" /></div>
+                <div class="factor-field"><label>Điểm rủi ro</label><input id="modalRiskScore" placeholder="Điểm rủi ro" /></div>
+                <div class="factor-field"><label>Mức rủi ro</label><input id="modalRiskLevel" placeholder="Mức rủi ro" /></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="saveDatasetModalBtn" class="primary-btn">Lưu cập nhật</button>
+              <button id="deleteDatasetModalBtn" class="ghost-btn">Xóa dòng</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" id="section-a3">
+        <div class="card hero"><span class="badge">A3</span><h2>Huấn luyện ANN / ANFIS</h2><p>Chia train/test, khởi tạo luật Sugeno, huấn luyện mô hình, kiểm định mô hình và hiển thị kết luận độ tin cậy.</p></div>
+        <div class="card">
+          <div class="toolbar">
+            <select id="trainingDatasetSelect"><option value="">Chưa có dataset</option></select>
+            <input id="trainingRegion" placeholder="Vùng dữ liệu (tự nhận từ dataset A2)" />
+            <select id="trainingSplitRatio"><option value="0.8">80/20</option><option value="0.7">70/30</option></select>
+            <select id="trainingMembership"><option value="gaussian">Gaussian</option><option value="gbell">Generalized Bell</option><option value="triangular">Triangular</option><option value="all">Auto-train all</option></select>
+            <select id="trainingRuleInitMode"><option value="data-driven">Khởi tạo luật từ dữ liệu</option><option value="seed">Khởi tạo luật chuyên gia/seed</option><option value="pruned-grid">Sinh đầy đủ luật ứng viên + pruning</option></select>
+            <input id="trainingEpochs" type="number" min="1" max="50" value="5" placeholder="Epochs" style="max-width:100px;" />
+            <input id="trainingPatience" type="number" min="1" max="20" value="2" placeholder="Patience" style="max-width:100px;" />
+            <input id="trainingPremiseLr" type="number" min="0.001" max="1" step="0.001" value="0.05" placeholder="Premise LR" style="max-width:120px;" />
+            <button id="splitDatasetBtn" class="ghost-btn">Chia train/test</button>
+            <button id="initSugenoBtn" class="ghost-btn">Khởi tạo luật Sugeno</button>
+            <button id="runTrainingBtn" class="primary-btn">Huấn luyện mô hình</button>
+            <button id="evaluateTrainingBtn" class="ghost-btn">Kiểm định mô hình</button>
+          </div>
+          <div class="step-status-row" id="trainingStepRow">
+            <span class="step-chip" id="trainSplitChip">1. Chưa chia train/test</span>
+            <span class="step-chip" id="trainSugenoChip">2. Chưa khởi tạo Sugeno</span>
+            <span class="step-chip" id="trainRunChip">3. Chưa huấn luyện</span>
+            <span class="step-chip" id="trainEvalChip">4. Chưa kiểm định</span>
+          </div>
+          <div id="trainingDatasetSummary" class="status-box">Chưa có dataset nào từ A2 để dùng cho huấn luyện.</div>
+          <div id="trainingStatus" class="status-box" style="margin-top:12px;">Chưa chạy huấn luyện.</div>
+          <div class="grid two-col" style="margin-top:12px;">
+            <div id="trainingRulesBox" class="status-box">Chưa khởi tạo luật Sugeno.</div>
+            <div id="trainingMetrics" class="status-box">Chưa có metrics.</div>
+          </div>
+          <div id="trainingRuleOriginBox" class="status-box" style="margin-top:12px;">Chưa có thông tin nguồn gốc luật.</div>
+          <div id="trainingRulePruningNarrativeBox" class="status-box" style="margin-top:12px;">Chưa có diễn giải về không gian luật và quá trình sàng lọc.</div>
+          <div class="card compact-card" style="margin-top:16px;">
+            <h3>Sơ đồ 5 lớp ANFIS</h3>
+            <div id="anfisFiveLayerBox" class="anfis-diagram">
+              <div class="anfis-terminal anfis-terminal-input">
+                <div class="anfis-terminal-head">ĐẦU VÀO</div>
+                <div class="anfis-terminal-title">Vector X1..X6</div>
+                <div class="anfis-terminal-sub">X1, X2, X3, X4, X5, X6</div>
+              </div>
+              <div class="anfis-link"></div>
+              <div class="anfis-node">
+                <div class="anfis-node-head">LỚP 1</div>
+                <div class="anfis-node-title">Fuzzification Layer</div>
+                <div class="anfis-node-sub">Mờ hóa đầu vào</div>
+                <div class="anfis-node-formula">X1..X6 → μA(x)</div>
+              </div>
+              <div class="anfis-link"></div>
+              <div class="anfis-node">
+                <div class="anfis-node-head">LỚP 2</div>
+                <div class="anfis-node-title">Rule Layer</div>
+                <div class="anfis-node-sub">Tính độ mạnh luật</div>
+                <div class="anfis-node-formula">wi = Π μA(x)</div>
+              </div>
+              <div class="anfis-link"></div>
+              <div class="anfis-node">
+                <div class="anfis-node-head">LỚP 3</div>
+                <div class="anfis-node-title">Normalization Layer</div>
+                <div class="anfis-node-sub">Chuẩn hóa trọng số</div>
+                <div class="anfis-node-formula">w̄i = wi / Σwi</div>
+              </div>
+              <div class="anfis-link"></div>
+              <div class="anfis-node">
+                <div class="anfis-node-head">LỚP 4</div>
+                <div class="anfis-node-title">Consequent Layer</div>
+                <div class="anfis-node-sub">Hàm kết quả Sugeno</div>
+                <div class="anfis-node-formula">f_i = aX + b</div>
+              </div>
+              <div class="anfis-link"></div>
+              <div class="anfis-node anfis-node-emphasis">
+                <div class="anfis-node-head">LỚP 5</div>
+                <div class="anfis-node-title">Output Layer</div>
+                <div class="anfis-node-sub">Tổng hợp đầu ra</div>
+                <div class="anfis-node-formula">y = Σ(w̄i·fi)</div>
+              </div>
+              <div class="anfis-link"></div>
+              <div class="anfis-terminal anfis-terminal-output">
+                <div class="anfis-terminal-head">ĐẦU RA</div>
+                <div class="anfis-terminal-title">Risk Score / Risk Level</div>
+                <div class="anfis-terminal-sub">Điểm rủi ro · Mức rủi ro</div>
+              </div>
+            </div>
+          </div>
+          <div id="trainingConclusion" class="status-box" style="margin-top:12px;">Chưa có kết luận độ tin cậy của mô hình.</div>
+          <details class="mobile-collapse-card" open>
+            <summary>Biểu đồ loss theo epoch</summary>
+            <div class="card compact-card" style="margin-top:12px; margin-bottom:0;">
+              <div id="trainingLossChart" class="chart-box">Chưa có dữ liệu loss theo epoch.</div>
+            </div>
+          </details>
+          <details class="mobile-collapse-card">
+            <summary>Biểu đồ hội tụ và khoảng cách hội tụ</summary>
+            <div class="grid two-col" style="margin-top:12px;">
+              <div class="card compact-card" style="margin-bottom:0;">
+                <h3>Diễn tiến hội tụ train / val / test</h3>
+                <div id="trainingConvergenceChart" class="chart-box">Chưa có dữ liệu hội tụ.</div>
+              </div>
+              <div class="card compact-card" style="margin-bottom:0;">
+                <h3>Khoảng cách hội tụ theo epoch</h3>
+                <div id="trainingGapChart" class="chart-box">Chưa có dữ liệu khoảng cách hội tụ.</div>
+              </div>
+            </div>
+          </details>
+          <details class="mobile-collapse-card">
+            <summary>Mức cải thiện loss và không gian huấn luyện 3D</summary>
+            <div class="card compact-card" style="margin-top:12px; margin-bottom:12px;">
+              <h3>Mức cải thiện loss qua từng epoch</h3>
+              <div id="trainingImprovementChart" class="chart-box">Chưa có dữ liệu cải thiện loss.</div>
+            </div>
+            <div class="card compact-card" style="margin-top:0; margin-bottom:0;">
+              <h3>Không gian diễn tiến huấn luyện 3D</h3>
+              <div id="training3DChart" class="chart-box">Chưa có dữ liệu biểu đồ 3D.</div>
+            </div>
+            <div id="trainingChartNarrativeBox" class="status-box" style="margin-top:12px;">Chưa có diễn giải trực quan quá trình huấn luyện.</div>
+          </details>
+          <details class="mobile-collapse-card">
+            <summary>Best epoch snapshot và so sánh epoch</summary>
+            <div class="card" style="margin-top:12px; margin-bottom:12px;">
+              <h3>Best epoch snapshot</h3>
+              <div id="bestEpochSnapshotBox" class="status-box">Chưa có snapshot tốt nhất.</div>
+            </div>
+          <div class="card table-wrap" style="margin-top:0; margin-bottom:0;">
+            <h3>So sánh tham số epoch đầu và epoch cuối</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Luật</th>
+                  <th>Epoch đầu</th>
+                  <th>Epoch cuối</th>
+                </tr>
+              </thead>
+              <tbody id="trainingEpochCompareBody"><tr><td colspan="3" class="muted">Chưa có dữ liệu so sánh epoch.</td></tr></tbody>
+            </table>
+          </div>
+          </details>
+          <details class="mobile-collapse-card">
+            <summary>Rule evolution và membership functions</summary>
+            <div class="card" style="margin-top:12px; margin-bottom:12px;">
+              <h3>Rule evolution timeline</h3>
+              <div id="trainingRuleTimeline" class="timeline-wrap">Chưa có dữ liệu evolution.</div>
+            </div>
+            <div class="card" style="margin-top:0; margin-bottom:0;">
+              <h3>Đường cong membership functions</h3>
+              <div id="membershipCurveBox" class="membership-curve-wrap">Chưa có dữ liệu membership curves.</div>
+            </div>
+          </details>
+          <details class="mobile-collapse-card">
+            <summary>Premise drift và các so sánh mở rộng</summary>
+            <div class="card table-wrap" style="margin-top:12px; margin-bottom:12px;">
+              <h3>Nhật ký biến động premise params theo epoch</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Epoch</th>
+                    <th>Luật</th>
+                    <th>Biến</th>
+                    <th>Thông số</th>
+                  </tr>
+                </thead>
+                <tbody id="premiseDriftBody"><tr><td colspan="4" class="muted">Chưa có dữ liệu biến động premise.</td></tr></tbody>
+              </table>
+            </div>
+            <div class="card" style="margin-top:0; margin-bottom:12px;">
+              <h3>So sánh ANFIS với baseline</h3>
+              <div id="baselineCompareBox" class="status-box">Chưa có dữ liệu so sánh baseline.</div>
+            </div>
+            <div class="card" style="margin-top:0; margin-bottom:12px;">
+              <h3>Đối chiếu trực tiếp ANFIS và ANN</h3>
+              <div id="anfisAnnCompareBox" class="status-box">Chưa có dữ liệu đối chiếu ANFIS và ANN.</div>
+            </div>
+            <div class="card" style="margin-top:0; margin-bottom:0;">
+              <h3>So sánh kiểu khởi tạo luật</h3>
+              <div id="ruleInitCompareBox" class="status-box">Chưa có dữ liệu so sánh kiểu khởi tạo luật.</div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="page-section" id="section-a4">
+        <div class="card hero"><span class="badge">A4</span><h2>Quản lý mô hình</h2><p>Xem danh sách mô hình đã huấn luyện, metadata, chỉ số chất lượng và đặt mô hình mặc định theo vùng.</p></div>
+        <div class="card"><div class="toolbar"><input id="modelRegionFilter" placeholder="Lọc theo vùng (ví dụ: Nam Trung Bộ)" /><button id="loadModelsBtn" class="primary-btn">Tải danh sách model</button><button id="downloadTrainingReportBtn" class="ghost-btn">Tải báo cáo A3</button></div><div id="modelStatus" class="status-box">Chưa tải model nào.</div><div id="defaultModelSummary" class="status-box" style="margin-top:12px;">Chưa xác định model mặc định.</div></div>
+        <div class="card table-wrap"><h3>Danh sách model</h3><table><thead><tr><th>ID</th><th>Tên model</th><th>Loại</th><th>Membership</th><th>Trạng thái</th><th>Metrics</th><th>Thao tác</th></tr></thead><tbody id="modelsBody"><tr><td colspan="7" class="muted">Chưa có model nào.</td></tr></tbody></table></div>
+        <div class="card" style="margin-top:16px;">
+          <h3>So sánh nhanh các membership</h3>
+          <div id="membershipCompareBox" class="status-box">Chưa có dữ liệu so sánh membership.</div>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <h3>So sánh seed/expert và data-driven</h3>
+          <div id="ruleInitSummaryBox" class="status-box">Chưa có dữ liệu so sánh kiểu khởi tạo luật.</div>
+        </div>
+        <div class="card compact-card" style="margin-top:16px;">
+          <h3>Biểu đồ so sánh membership</h3>
+          <div class="toolbar"><button id="downloadMembershipReportBtn" class="ghost-btn">Tải báo cáo so sánh membership</button></div>
+          <div id="membershipCompareChartR2" class="chart-box" style="margin-top:12px;">Chưa có dữ liệu biểu đồ R².</div>
+          <div id="membershipCompareChartMae" class="chart-box" style="margin-top:12px;">Chưa có dữ liệu biểu đồ MAE.</div>
+          <div id="membershipCompareChartRmse" class="chart-box" style="margin-top:12px;">Chưa có dữ liệu biểu đồ RMSE.</div>
+        </div>
+      </section>
+
+      <section class="page-section" id="section-b1">
+        <div class="card hero"><span class="badge">B1</span><h2>Nhập công trình mới</h2><p>Nhập hồ sơ công trình và các thông số theo 6 nhóm yếu tố; hệ thống sẽ tự xử lý dữ liệu đầu vào để phục vụ dự báo rủi ro.</p></div>
+        <div class="card">
+          <div class="toolbar">
+            <input id="b1ImportFile" type="file" accept=".xlsx,.xls" />
+            <button id="importB1ExcelBtn" class="ghost-btn">Import từ Excel mẫu</button>
+          </div>
+          <div class="project-intake-grid">
+            <input id="rowProjectId" placeholder="Mã công trình" />
+            <input id="rowProjectName" placeholder="Tên công trình" />
+            <input id="rowRegion" placeholder="Vùng / khu vực" />
+            <input id="rowProjectLocation" placeholder="Địa điểm xây dựng" />
+            <input id="rowProjectType" placeholder="Loại công trình (đê/kè)" />
+            <select id="rowProjectStage">
+              <option value="">Chọn giai đoạn thi công</option>
+              <option value="chuẩn bị thi công">Chuẩn bị thi công</option>
+              <option value="thi công nền móng">Thi công nền móng</option>
+              <option value="thi công thân đê/kè">Thi công thân đê/kè</option>
+              <option value="hoàn thiện và bảo vệ">Hoàn thiện và bảo vệ</option>
+            </select>
+          </div>
+          <div class="status-box intake-note">Khu vực này dùng để nhập chi tiết hồ sơ công trình; hệ thống sẽ tự cấu trúc và xử lý dữ liệu đầu vào trước khi thực hiện dự báo rủi ro.</div>
+          <div class="b1-input-grid">
+            <div class="factor-card"><h3>Nhóm 1 - Điều kiện tự nhiên</h3><div class="factor-field"><label>Chiều cao sóng <span>(m)</span></label><input id="rowWaveHeight" type="number" step="0.1" placeholder="Ví dụ: 3.4" /><small>Số liệu đo hoặc giá trị thiết kế đặc trưng.</small></div><div class="factor-field"><label>Chế độ thủy triều</label><select id="rowTideMode"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thấp</option><option value="2">2 - Thấp</option><option value="3">3 - Trung bình</option><option value="4">4 - Cao</option><option value="5">5 - Rất cao</option></select></div><div class="factor-field"><label>Tốc độ gió <span>(m/s)</span></label><input id="rowWindSpeed" type="number" step="0.1" placeholder="Ví dụ: 12.0" /></div><div class="factor-field"><label>Mức độ ảnh hưởng bão</label><select id="rowStormLevel"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thấp</option><option value="2">2 - Thấp</option><option value="3">3 - Trung bình</option><option value="4">4 - Cao</option><option value="5">5 - Rất cao</option></select></div></div>
+            <div class="factor-card"><h3>Nhóm 2 - Địa chất - nền móng</h3><div class="factor-field"><label>Loại đất nền</label><select id="rowSoilType"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thuận lợi</option><option value="2">2 - Thuận lợi</option><option value="3">3 - Trung bình</option><option value="4">4 - Bất lợi</option><option value="5">5 - Rất bất lợi</option></select></div><div class="factor-field"><label>Chiều dày lớp đất yếu <span>(m)</span></label><input id="rowWeakLayer" type="number" step="0.1" placeholder="Ví dụ: 4.0" /></div><div class="factor-field"><label>Nguy cơ trượt mái</label><select id="rowSlideRisk"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thấp</option><option value="2">2 - Thấp</option><option value="3">3 - Trung bình</option><option value="4">4 - Cao</option><option value="5">5 - Rất cao</option></select></div><div class="factor-field"><label>Chất lượng khảo sát địa chất</label><select id="rowSurveyQuality"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất tốt</option><option value="2">2 - Tốt</option><option value="3">3 - Trung bình</option><option value="4">4 - Yếu</option><option value="5">5 - Rất yếu</option></select></div></div>
+            <div class="factor-card"><h3>Nhóm 3 - Kỹ thuật - công nghệ</h3><div class="factor-field"><label>Độ phức tạp kỹ thuật</label><select id="rowTechComplex"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất đơn giản</option><option value="2">2 - Đơn giản</option><option value="3">3 - Trung bình</option><option value="4">4 - Phức tạp</option><option value="5">5 - Rất phức tạp</option></select></div><div class="factor-field"><label>Độ khó biện pháp thi công</label><select id="rowConstructionDiff"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất dễ</option><option value="2">2 - Dễ</option><option value="3">3 - Trung bình</option><option value="4">4 - Khó</option><option value="5">5 - Rất khó</option></select></div><div class="factor-field"><label>Phụ thuộc thiết bị chuyên dụng</label><select id="rowEquipmentDepend"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thấp</option><option value="2">2 - Thấp</option><option value="3">3 - Trung bình</option><option value="4">4 - Cao</option><option value="5">5 - Rất cao</option></select></div><div class="factor-field"><label>Nguy cơ sai sót kỹ thuật</label><select id="rowTechError"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thấp</option><option value="2">2 - Thấp</option><option value="3">3 - Trung bình</option><option value="4">4 - Cao</option><option value="5">5 - Rất cao</option></select></div></div>
+            <div class="factor-card"><h3>Nhóm 4 - Vật liệu - thiết bị - logistics</h3><div class="factor-field"><label>Khả năng cung ứng vật liệu</label><select id="rowMaterialSupply"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thuận lợi</option><option value="2">2 - Thuận lợi</option><option value="3">3 - Trung bình</option><option value="4">4 - Khó khăn</option><option value="5">5 - Rất khó khăn</option></select></div><div class="factor-field"><label>Khả năng huy động thiết bị</label><select id="rowEquipmentMobilize"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thuận lợi</option><option value="2">2 - Thuận lợi</option><option value="3">3 - Trung bình</option><option value="4">4 - Khó khăn</option><option value="5">5 - Rất khó khăn</option></select></div><div class="factor-field"><label>Rủi ro vận chuyển</label><select id="rowTransportRisk"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thấp</option><option value="2">2 - Thấp</option><option value="3">3 - Trung bình</option><option value="4">4 - Cao</option><option value="5">5 - Rất cao</option></select></div><div class="factor-field"><label>Nguy cơ thiếu hụt nguồn lực</label><select id="rowResourceShortage"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thấp</option><option value="2">2 - Thấp</option><option value="3">3 - Trung bình</option><option value="4">4 - Cao</option><option value="5">5 - Rất cao</option></select></div></div>
+            <div class="factor-card"><h3>Nhóm 5 - Tổ chức - quản lý thi công</h3><div class="factor-field"><label>Năng lực quản lý hiện trường</label><select id="rowSiteManage"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất tốt</option><option value="2">2 - Tốt</option><option value="3">3 - Trung bình</option><option value="4">4 - Yếu</option><option value="5">5 - Rất yếu</option></select></div><div class="factor-field"><label>Rủi ro phối hợp các bên</label><select id="rowCoordinationRisk"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thấp</option><option value="2">2 - Thấp</option><option value="3">3 - Trung bình</option><option value="4">4 - Cao</option><option value="5">5 - Rất cao</option></select></div><div class="factor-field"><label>Nguy cơ chậm tiến độ</label><select id="rowScheduleRisk"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thấp</option><option value="2">2 - Thấp</option><option value="3">3 - Trung bình</option><option value="4">4 - Cao</option><option value="5">5 - Rất cao</option></select></div><div class="factor-field"><label>Khả năng xử lý sự cố</label><select id="rowIssueHandling"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất tốt</option><option value="2">2 - Tốt</option><option value="3">3 - Trung bình</option><option value="4">4 - Yếu</option><option value="5">5 - Rất yếu</option></select></div></div>
+            <div class="factor-card"><h3>Nhóm 6 - An toàn - môi trường</h3><div class="factor-field"><label>An toàn lao động</label><select id="rowLaborSafety"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất an toàn</option><option value="2">2 - An toàn</option><option value="3">3 - Trung bình</option><option value="4">4 - Rủi ro</option><option value="5">5 - Rất rủi ro</option></select></div><div class="factor-field"><label>An toàn thi công trên biển</label><select id="rowMarineSafety"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất an toàn</option><option value="2">2 - An toàn</option><option value="3">3 - Trung bình</option><option value="4">4 - Rủi ro</option><option value="5">5 - Rất rủi ro</option></select></div><div class="factor-field"><label>Rủi ro môi trường</label><select id="rowEnvironmentRisk"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất thấp</option><option value="2">2 - Thấp</option><option value="3">3 - Trung bình</option><option value="4">4 - Cao</option><option value="5">5 - Rất cao</option></select></div><div class="factor-field"><label>Khả năng ứng cứu khẩn cấp</label><select id="rowEmergencyResponse"><option value="">Chọn mức đánh giá</option><option value="1">1 - Rất tốt</option><option value="2">2 - Tốt</option><option value="3">3 - Trung bình</option><option value="4">4 - Yếu</option><option value="5">5 - Rất yếu</option></select></div></div>
+          </div>
+          <div class="toolbar" style="margin-top:16px;"><button id="normalizeXBtn" class="primary-btn">Xử lý dữ liệu đầu vào</button><button id="createDatasetRowBtn" class="ghost-btn">Lưu vào dataset</button><button id="clearDatasetRowBtn" class="ghost-btn">Làm mới form</button></div>
+          <div class="grid two-col" style="margin-top:16px;"><div class="card compact-card"><h3>Tóm tắt đầu vào</h3><div id="b1SummaryBox" class="status-box">Khối này sẽ hiển thị mức độ đầy đủ của hồ sơ đầu vào và các chỉ tiêu tổng hợp nội bộ sau khi hệ thống xử lý dữ liệu.</div></div><div class="card compact-card"><h3>Ghi chú dữ liệu</h3><div class="status-box">Điểm rủi ro và mức rủi ro của dữ liệu huấn luyện sẽ được hệ thống tự động suy ra từ hồ sơ công trình theo quy tắc gán nhãn nội bộ, thay vì người dùng phải nhập tay.</div></div></div>
+        </div>
+      </section>
+
+      <section class="page-section" id="section-b2">
+        <div class="card hero"><span class="badge">B2</span><h2>Dự báo rủi ro</h2><p>Hệ thống sử dụng mô hình mặc định hoặc mô hình được chọn để xử lý hồ sơ đầu vào, tự ánh xạ thành các chỉ tiêu nội bộ và tính toán mức độ rủi ro cho công trình.</p></div>
+        <div class="card">
+          <div class="prediction-layout">
+            <div class="prediction-form-card">
+              <h3>Thiết lập mô hình và dữ liệu phân tích</h3>
+              <div class="form-grid">
+                <input id="predictionRegion" placeholder="Vùng (ví dụ: Nam Trung Bộ)" />
+                <select id="predictionModelSelect"><option value="">Chọn model</option></select>
+              </div>
+              <div class="toolbar"><button id="runPredictionBtn" class="primary-btn">Tính toán rủi ro</button></div>
+            </div>
+            <div class="prediction-summary-card">
+              <h3>Tóm tắt dự báo</h3>
+              <div id="predictionStatus" class="status-box">Chưa chạy dự báo.</div>
+              <div id="predictionResult" class="status-box" style="margin-top:12px;">Chưa có kết quả dự báo.</div>
+              <div id="predictionModelHint" class="status-box" style="margin-top:12px;">Gợi ý: ưu tiên chọn model mặc định nếu đã được thiết lập ở A4. Hệ thống sẽ tự xử lý hồ sơ đầu vào và sinh các chỉ tiêu nội bộ trước khi chạy dự báo.</div>
+              <div id="predictionInternalVectorBox" class="status-box" style="margin-top:12px;">Các chỉ tiêu tổng hợp nội bộ sẽ hiển thị sau khi hệ thống xử lý hồ sơ đầu vào.</div>
+              <div id="predictionAdvice" class="status-box" style="margin-top:12px;">Khuyến cáo quản lý sẽ hiển thị sau khi có kết quả.</div>
+              <div id="predictionDominantBox" class="status-box" style="margin-top:12px;">Nhóm rủi ro nổi trội nhất sẽ hiển thị sau khi tính toán.</div>
+              <div id="predictionRiskMatrixBox" class="status-box" style="margin-top:12px;">Ma trận rủi ro nội bộ (Likelihood × Impact) sẽ hiển thị sau khi dự báo.</div>
+              <div id="predictionRecommendationBox" class="status-box" style="margin-top:12px;">Khuyến nghị quản lý rủi ro chi tiết sẽ hiển thị sau khi dự báo.</div>
+            </div>
+          </div>
+          <div class="grid two-col" style="margin-top:16px;">
+            <div class="card compact-card">
+              <h3>Biểu đồ cột các chỉ tiêu tổng hợp nội bộ</h3>
+              <div id="predictionBarChart" class="chart-box">Chưa có dữ liệu biểu đồ.</div>
+            </div>
+            <div class="card compact-card">
+              <h3>Biểu đồ radar các chỉ tiêu tổng hợp nội bộ</h3>
+              <div id="predictionRadarChart" class="chart-box">Chưa có dữ liệu biểu đồ.</div>
+            </div>
+          </div>
+          <div class="card table-wrap" style="margin-top:16px;">
+            <h3>Chi tiết suy diễn ANFIS-Sugeno</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Luật</th>
+                  <th>wi</th>
+                  <th>w̄i</th>
+                  <th>fi</th>
+                </tr>
+              </thead>
+              <tbody id="predictionRuleBody"><tr><td colspan="4" class="muted">Chưa có chi tiết suy diễn.</td></tr></tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" id="section-b3">
+        <div class="card hero"><span class="badge">B3</span><h2>Báo cáo và lịch sử</h2><p>Lưu trữ hồ sơ, xem payload báo cáo, so sánh, xóa lịch sử và xuất báo cáo Word.</p></div>
+        <div class="grid two-col"><div class="card"><div class="toolbar"><button id="refreshHistoryBtn" class="primary-btn">Tải lịch sử</button><button id="downloadReportBtn" class="ghost-btn">Tải Word</button><button id="compareSelectedBtn" class="ghost-btn">So sánh đã chọn</button></div><div id="historyStatus" class="status-box">Chưa tải lịch sử.</div><div id="historyPayloadBox" class="status-box" style="margin-top:12px;">Chưa xem payload báo cáo nào.</div></div><div class="card"><h3>Ghi chú sử dụng</h3><div class="status-box">Sau khi chạy dự báo ở B2, hồ sơ mới sẽ xuất hiện tại đây. Anh có thể bấm <strong>Xem</strong> để đọc payload báo cáo, bấm <strong>Tải Word</strong> để tải báo cáo thật, bấm <strong>So sánh đã chọn</strong> để so sánh nhiều công trình, và bấm <strong>Xóa</strong> nếu muốn dọn lịch sử thử nghiệm.</div></div></div>
+        <div class="card table-wrap history-table-wrap"><h3>Lịch sử dự báo</h3><table><thead><tr><th>Chọn</th><th>ID</th><th>Project</th><th>Giai đoạn</th><th>Score</th><th>Level</th><th>Created</th><th>Thao tác</th></tr></thead><tbody id="historyBody"><tr><td colspan="8" class="muted">Chưa có lịch sử dự báo nào.</td></tr></tbody></table><div id="historyCardList" class="history-card-list"></div></div>
+        <div class="grid two-col"><div class="card compact-card"><h3>So sánh các chỉ tiêu tổng hợp nội bộ giữa các công trình</h3><div id="historyCompareChart" class="chart-box">Chưa có dữ liệu so sánh.</div></div><div class="card compact-card"><h3>So sánh điểm rủi ro tổng hợp</h3><div id="historyScoreCompareChart" class="chart-box">Chưa có dữ liệu so sánh.</div></div></div>
+      </section>
+    </main>
+  </div>
+  <script src="./app.js?v=20260514c"></script>
+</body>
+</html>

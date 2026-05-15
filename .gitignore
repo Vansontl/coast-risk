@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.log
+.env
+backend/.env
+.venv/
+backend/.venv/
+node_modules/
+backend/storage/
+tmp_*.py

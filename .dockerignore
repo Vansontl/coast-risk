@@ -1,0 +1,11 @@
+.git
+.gitignore
+backend/.venv
+backend/__pycache__
+backend/app/__pycache__
+backend/storage
+**/__pycache__
+**/*.pyc
+*.ps1
+tmp_*.py
+*.log

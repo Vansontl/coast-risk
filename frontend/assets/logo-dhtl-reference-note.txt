@@ -1,0 +1,1 @@
+Use the exact DHTL logo image provided by the user instead of the previously recreated SVG.
